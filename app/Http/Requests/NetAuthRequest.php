@@ -24,10 +24,7 @@ class NetAuthRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'token' => 'required|string',
-            'dest' => 'nullable|url',
-            'hwc_ip' => 'required|ip',
-            'hwc_port' => 'required|integer|min:1|max:65535',
+
         ];
     }
 
@@ -39,13 +36,6 @@ class NetAuthRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'token.required' => 'O token é obrigatório.',
-            'hwc_ip.required' => 'O endereço IP do controlador é obrigatório.',
-            'hwc_ip.ip' => 'O endereço IP fornecido não é válido.',
-            'hwc_port.required' => 'A porta do controlador é obrigatória.',
-            'hwc_port.integer' => 'A porta deve ser um número inteiro.',
-            'hwc_port.min' => 'O valor mínimo para a porta é 1.',
-            'hwc_port.max' => 'O valor máximo para a porta é 65535.',
         ];
     }
 

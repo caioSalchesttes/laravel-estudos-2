@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\{AlertController, AsavController, UnisinosController};
+use App\Http\Controllers\{AlertController, AuthController, PortalController};
 use Illuminate\Support\Facades\Route;
 
-Route::get('/unisinos', [UnisinosController::class, 'index'])->name('unisinos.index');
-Route::post('/unisinos', [UnisinosController::class, 'store'])->name('unisinos.store');
+Route::get('/', [PortalController::class, 'login'])->name('portal.login');
+Route::get('/register', [PortalController::class, 'register'])->name('portal.register');
 
-Route::get('/asav', [AsavController::class, 'index'])->name('asav.index');
-Route::post('/asav', [AsavController::class, 'store'])->name('asav.store');
+
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('alert', [AlertController::class, 'index'])->name('alert');

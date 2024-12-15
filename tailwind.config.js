@@ -18,8 +18,8 @@ export default {
         },
         'purple-blue': {
           100: '#D2DCFA', // Exemplo de cor clara
-          500: '#29388f', // Exemplo de cor média
-          600: '#551ce5', // Exemplo de cor mais escura
+          500: '#004a8d', // Exemplo de cor média
+          600: '#012c55', // Exemplo de cor mais escura
         },
         'wine': {
           100: '#E8A2B1', // Exemplo de cor clara (uma tonalidade mais clara de #681726)

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,9 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cpf' => 'required|numeric',
+            'name'  => 'required|string',
+            'email' => 'required|email|unique:users',
+            'cpf'   => 'required|numeric|unique:users',
         ];
     }
 
@@ -34,8 +36,14 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'cpf.required' => 'CPF é obrigatório',
-            'cpf.numeric'  => 'CPF inválido',
+            'name.required'  => 'Nome é obrigatório',
+            'email.required' => 'Email é obrigatório',
+            'email.unique'   => 'Email já cadastrado',
+            'cpf.required'   => 'CPF é obrigatório',
+            'cpf.numeric'    => 'CPF inválido',
+            'cpf.unique'     => 'CPF já cadastrado',
+            'email.email'    => 'Email inválido',
+            'name.string'    => 'Nome inválido',
         ];
     }
 }
