@@ -26,7 +26,8 @@ class AuthController
             'payload' => []
         ]);
 
-        return response()->json([
+        return redirect()->route('alert.success', [
+            'alert' => 'Sucesso',
             'message' => 'Usuário logado com sucesso'
         ]);
     }
@@ -46,8 +47,9 @@ class AuthController
             'payload' => []
         ]);
 
-        return response()->json([
-            'message' => 'Usuário logado com sucesso'
+        return redirect()->route('alert.success', [
+            'alert' => 'Sucesso',
+            'message' => 'Usuário cadastrado com sucesso'
         ]);
     }
 }

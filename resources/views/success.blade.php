@@ -14,18 +14,24 @@
         flex-direction: column;
         justify-content: space-between;
     }
+    .logo {
+        height: 48px;
+    }
 </style>
 <body>
 <div class="all mb-4"    >
     <!-- Header -->
     <div class="header w-full container flex mx-auto px-5 justify-center lg:justify-between items-center pt-2">
-        <img src="assets/images/{{$company}}.png" class="logo" alt="">
+        <div class="flex">
+            <img src="assets/images/senac.png" class="logo" style="margin-right: 30px" alt="">
+            <img src="assets/images/sesc.svg" class="logo" alt="">
+        </div>
         <span class="text-1xl hidden lg:block font-bold text-dark-grey-900">Acesso para Visitantes</span>
     </div>
     <!-- Content -->
     <div class="content container flex flex-col mx-auto bg-white rounded-lg px-5 mb:px-0 text-center items-center">
 
-        <img src="assets/images/Off.png" alt="" style="height: 140px;">
+        <img src="assets/images/Ok.png" alt="" style="height: 140px;">
         <!-- <img src="images/Ok.png" alt="" style="height: 140px;"> -->
         <h3 class="mb-2 2xl:mb-3 text-3xl 2xl:text-4xl font-extrabold text-dark-grey-900">{{$alert}}</h3>
         <p class="mb-2 2xl:mb-4 text-grey-700" style="max-width: 500px;">{{$message}} </p>
@@ -36,7 +42,7 @@
     <div class="flex flex-wrap mb-3 2xl:mb-5 px-5 mb:px-0">
         <div class="w-full max-w-full sm:w-3/4 mx-auto text-center">
             <p class="text-sm text-slate-500 pb-1">
-                {{$company}} - Em caso de dificuldades de conexão entre em contato com um de nossos colaboradores.
+                Portal - Em caso de dificuldades de conexão entre em contato com um de nossos colaboradores.
             </p>
         </div>
     </div>

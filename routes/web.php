@@ -10,4 +10,5 @@ Route::get('/register', [PortalController::class, 'register'])->name('portal.reg
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-Route::get('alert', [AlertController::class, 'index'])->name('alert');
+Route::get('alert-success', [AlertController::class, 'success'])->name('alert.success');
+Route::get('alert-fail', [AlertController::class, 'fail'])->name('alert.fail');
