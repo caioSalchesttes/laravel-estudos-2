@@ -58,8 +58,8 @@ class AuthController
 
     protected function allowUser(array $query)
     {
-        $request = Http::post(sprintf('%s/reg.php', $query['RADIUS-NAS-IP']));
+        $request = Http::post(sprintf('http://%s/reg.php', $query['RADIUS-NAS-IP']));
 
-        dd($request->body());
+        dd($request->json());
     }
 }
