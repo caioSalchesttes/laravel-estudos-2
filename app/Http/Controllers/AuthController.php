@@ -24,7 +24,7 @@ class AuthController
 
         Visitor::create([
             'user_id' => $findUser->id,
-            'payload' => []
+            'payload' => $request->query()
         ]);
 
         return view('continue', [
@@ -44,7 +44,7 @@ class AuthController
 
         Visitor::create([
             'user_id' => $user->id,
-            'payload' => []
+            'payload' => $request->query()
         ]);
 
         return view('continue', [
