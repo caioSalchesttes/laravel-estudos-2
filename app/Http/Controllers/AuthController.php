@@ -22,16 +22,13 @@ class AuthController
             ]);
         }
 
-        $this->allowUser($request->query());
-
         Visitor::create([
             'user_id' => $findUser->id,
             'payload' => []
         ]);
 
-        return redirect()->route('alert.success', [
-            'alert' => 'Sucesso',
-            'message' => 'Usuário logado com sucesso'
+        return view('continue', [
+            'query' => $request->query()
         ]);
     }
 
@@ -50,16 +47,8 @@ class AuthController
             'payload' => []
         ]);
 
-        return redirect()->route('alert.success', [
-            'alert' => 'Sucesso',
-            'message' => 'Usuário cadastrado com sucesso'
+        return view('continue', [
+            'query' => $request->query()
         ]);
-    }
-
-    protected function allowUser(array $query)
-    {
-        $request = Http::post(sprintf('http://%s/reg.php', $query['RADIUS-NAS-IP']));
-
-        dd($request->json());
     }
 }
