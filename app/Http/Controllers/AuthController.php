@@ -7,6 +7,7 @@ use App\Http\Requests\NetAuthRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Models\Visitor;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class AuthController
@@ -16,10 +17,12 @@ class AuthController
         $findUser = User::where('cpf', $request->cpf)->first();
 
         if(!$findUser){
-            return redirect()->route('portal.register')->withErrors([
+            return redirect()->route('portal.register', $request->query())->withErrors([
                 'user' => 'Usuário não encontrado, por favor, realize o cadastro'
             ]);
         }
+
+        $this->allowUser($request->query());
 
         Visitor::create([
             'user_id' => $findUser->id,
@@ -37,7 +40,7 @@ class AuthController
         $user = User::create($request->all());
 
         if(!$user){
-            return redirect()->route('portal.register')->withErrors([
+            return redirect()->route('portal.register', $request->query())->withErrors([
                 'user' => 'Erro ao cadastrar usuário, tente novamente'
             ]);
         }
@@ -51,5 +54,12 @@ class AuthController
             'alert' => 'Sucesso',
             'message' => 'Usuário cadastrado com sucesso'
         ]);
+    }
+
+    protected function allowUser(array $query)
+    {
+        $request = Http::post(sprintf('%s/reg.php', $query['RADIUS-NAS-IP']));
+
+        dd($request->body());
     }
 }

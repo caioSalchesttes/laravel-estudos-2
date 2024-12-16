@@ -24,7 +24,18 @@ class NetAuthRequest extends FormRequest
     public function rules(): array
     {
         return [
-
+            'url'                => 'required|string|max:255',
+            'ssid'               => 'required|string|max:50',
+            'mac'                => 'required|string|max:50|regex:/^[0-9a-fA-F]{12}$/',
+            'autherr'            => 'nullable|integer|min:0',
+            'challenge'          => 'nullable|string|max:255',
+            'Called-Station-Id'  => 'nullable|string|max:50',
+            'NAS-IP-Address'     => 'nullable|ip',
+            'RADIUS-NASIP'       => 'nullable|ip',
+            'Calling-Station-Id' => 'nullable|string|max:50',
+            'STA-IP'             => 'nullable|ip',
+            'NAS-ID'             => 'nullable|string|max:255',
+            'MGT-MAC-Address'    => 'nullable|string|regex:/^[0-9a-fA-F]{12}$/',
         ];
     }
 
@@ -51,13 +62,10 @@ class NetAuthRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(
-            redirect()->route('alert', [
-                'company' => $this->path(),
-                'alert' => 'Erro',
+            redirect()->route('alert.fail', [
+                'alert'   => 'Ops!',
                 'message' => 'Os dados fornecidos não são válidos.'
             ])
-                ->withErrors($validator)
-                ->withInput()
         );
     }
 }

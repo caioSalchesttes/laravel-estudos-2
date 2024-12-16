@@ -54,7 +54,7 @@
             <div class="flex items-center justify-center w-full lg:px-12">
                 <div class="flex items-center pb-5 lg:pb-0">
                     <form class="flex flex-col w-full h-full pb-1 text-center bg-white rounded-3xl"
-                          action="{{route('login')}}" method="post" id="form"
+                          action="{{route('login', $query)}}" method="post" id="form"
                           style="max-width: 500px;">
                         @csrf
                         <h3 class="mb-2 2xl:mb-3 mt-10 md:mt-0 text-3xl 2xl:text-4xl font-extrabold text-dark-grey-900">
@@ -72,7 +72,7 @@
                             Acessar
                         </button>
                         <p class="text-sm leading-relaxed text-grey-900">Ainda não possui cadastro? <a
-                                href="{{route('portal.register')}}"
+                                href="{{route('portal.register', $query)}}"
                                 class="font-bold text-purple-blue-500">Clique aqui</a></p>
                         <br>
                         <p class="text-sm leading-relaxed text-grey-900">Ao realizar o acesso você confirma que leu e

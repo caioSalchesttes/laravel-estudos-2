@@ -12,14 +12,14 @@ class PortalController
     public function login(NetAuthRequest $request): View
     {
         return view('login', [
-            'ssid' => $user_attributes['response']['ssid'] ?? 'Unknown SSID'
+            'query' => $request->query()
         ]);
     }
 
     public function register(NetAuthRequest $request): View
     {
         return view('register', [
-            'ssid' => $user_attributes['response']['ssid'] ?? 'Unknown SSID'
+            'query' => $request->query()
         ]);
     }
 }
