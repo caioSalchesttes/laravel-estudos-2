@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Alert</title>
+    <title>Sesc/Senac DN</title>
+    <link rel="icon" sizes="any" type="image/svg+xml" href="assets/images/fav.svg">
     @vite('resources/css/app.css')
 </head>
 <style>
@@ -23,8 +24,8 @@
     <!-- Header -->
     <div class="header w-full container flex mx-auto px-5 justify-center lg:justify-between items-center pt-2">
         <div class="flex">
-            <img src="assets/images/senac.png" class="logo" style="margin-right: 30px" alt="">
-            <img src="assets/images/sesc.svg" class="logo" alt="">
+            <img src="assets/images/sesc.svg" class="logo" style="margin-right: 30px" alt="">
+            <img src="assets/images/senac.png" class="logo" alt="">
         </div>
         <span class="text-1xl hidden lg:block font-bold text-dark-grey-900">Acesso para Visitantes</span>
     </div>
@@ -42,7 +43,7 @@
     <div class="flex flex-wrap mb-3 2xl:mb-5 px-5 mb:px-0">
         <div class="w-full max-w-full sm:w-3/4 mx-auto text-center">
             <p class="text-sm text-slate-500 pb-1">
-                Portal - Em caso de dificuldades de conexão entre em contato com um de nossos colaboradores.
+                Sesc/Senac DN  - Em caso de dificuldades de conexão entre em contato com um de nossos colaboradores.
             </p>
         </div>
     </div>
