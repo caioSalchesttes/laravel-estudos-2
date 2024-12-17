@@ -89,6 +89,7 @@
                                class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
                         <div class="text-sm text-start text-red-500 mb-4">
                             <span class="text-sm text-start text-red-500">{{ $errors->first('cpf') }}</span>
+                            <p id="error" class="text-sm text-start text-red-500" style="display: none;">CPF inválido!</p>
                         </div>
                         <button
                             class="w-full px-6 py-4 mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 bg-purple-blue-500">
@@ -99,7 +100,7 @@
                                 class="font-bold text-purple-blue-500">Clique aqui</a></p>
                         <br>
                         <p class="text-sm leading-relaxed text-grey-900">Ao realizar o acesso você confirma que leu e
-                            concorda com as <br> <a href="javascript:void(0)" class="font-bold text-grey-700">políticas
+                            concorda com as <br> <a href="{{route('policies', $query)}}" class="font-bold text-grey-700">políticas
                                 de segurança.</a></p>
                     </form>
                 </div>
@@ -118,16 +119,23 @@
 
 </div>
 <script>
-
     const cpfInput = document.getElementById('cpf');
     const form = document.getElementById('form');
+    const errorMessage = document.getElementById('error');
 
     cpfInput.value = cpfInput.value ? cpf(cpfInput.value) : '';
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
-        cpfInput.value = cpfInput.value.replace(/\D/g, '');
-        this.submit();
+        const plainCPF = cpfInput.value.replace(/\D/g, ''); // Remove formatação
+
+        if (!validateCPF(plainCPF)) {
+            errorMessage.style.display = 'block';
+        } else {
+            errorMessage.style.display = 'none';
+            cpfInput.value = plainCPF; // Envia o CPF sem formatação
+            this.submit();
+        }
     });
 
     cpfInput.addEventListener('input', function (e) {
@@ -135,19 +143,42 @@
     });
 
     function cpf(v) {
-
         if (v.length >= 14) {
             return v.substring(0, 14);
         }
 
-        v = v.replace(/\D/g, "")                    //Remove tudo o que não é dígito
-        v = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
-        v = v.replace(/(\d{3})(\d)/, "$1.$2")       //Coloca um ponto entre o terceiro e o quarto dígitos
-                                                    //de novo (para o segundo bloco de números)
-        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2") //Coloca um hífen entre o terceiro e o quarto dígitos
-        return v
+        v = v.replace(/\D/g, "");                    // Remove tudo o que não é dígito
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");       // Coloca um ponto entre o terceiro e o quarto dígitos
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");       // Segundo ponto
+        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2"); // Coloca um hífen entre o terceiro e o quarto dígitos
+        return v;
     }
 
+    function validateCPF(cpf) {
+        if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false; // CPF inválido se todos os números forem iguais
+
+        let sum = 0;
+        let remainder;
+
+        // Valida primeiro dígito
+        for (let i = 1; i <= 9; i++) {
+            sum += parseInt(cpf.charAt(i - 1)) * (11 - i);
+        }
+        remainder = (sum * 10) % 11;
+        if (remainder === 10 || remainder === 11) remainder = 0;
+        if (remainder !== parseInt(cpf.charAt(9))) return false;
+
+        // Valida segundo dígito
+        sum = 0;
+        for (let i = 1; i <= 10; i++) {
+            sum += parseInt(cpf.charAt(i - 1)) * (12 - i);
+        }
+        remainder = (sum * 10) % 11;
+        if (remainder === 10 || remainder === 11) remainder = 0;
+        if (remainder !== parseInt(cpf.charAt(10))) return false;
+
+        return true;
+    }
 </script>
 </body>
 </html>

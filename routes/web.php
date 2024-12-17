@@ -12,3 +12,4 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('alert-success', [AlertController::class, 'success'])->name('alert.success');
 Route::get('alert-fail', [AlertController::class, 'fail'])->name('alert.fail');
+Route::get('policies', [\App\Http\Controllers\PolicyController::class, 'index'])->name('policies');
