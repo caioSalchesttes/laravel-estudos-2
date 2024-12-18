@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Unisinos</title>
-    <link rel="icon" type="image/x-icon" href="assets/images/unisinos.png">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
     @vite('resources/css/app.css')
 </head>
 <style>
