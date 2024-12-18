@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sesc/Senac DN</title>
-    <link rel="icon" sizes="any" type="image/svg+xml" href="assets/images/fav.svg">
+    <title>Unisinos</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/unisinos.png">
     @vite('resources/css/app.css')
 </head>
 <style>
@@ -43,8 +43,7 @@
     <!-- Header -->
     <div class="header w-full container flex mx-auto px-5 justify-center lg:justify-between items-center pt-2">
         <div class="flex">
-            <img src="assets/images/sesc.svg" class="logo" style="margin-right: 30px" alt="">
-            <img src="assets/images/senac.png" class="logo" alt="">
+            <img src="assets/images/unisinos.png" class="logo" alt="">
         </div>
         <span class="text-1xl hidden lg:block font-bold text-dark-grey-900">Acesso para Visitantes</span>
     </div>
@@ -83,6 +82,14 @@
                         <div class="text-sm text-start text-red-500 mb-4">
                             <span class="text-sm text-start text-red-500">{{ $errors->first('email') }}</span>
                         </div>
+
+                        <label for="phone" class="mb-2 mt text-sm text-start text-grey-900">Telefone</label>
+                        <input id="phone" name="phone" type="text" placeholder="(00) 00000-0000"
+                               value="{{ old('phone') }}"
+                               class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
+                        <div class="text-sm text-start text-red-500 mb-4">
+                            <span class="text-sm text-start text-red-500">{{ $errors->first('phone') }}</span>
+                        </div>
                         <label for="cpf" class="mb-2 text-sm text-start text-grey-900">CPF</label>
                         <input id="cpf" name="cpf" type="text" placeholder="000.000.000-00"
                                value="{{ old('cpf') }}"
@@ -111,7 +118,7 @@
     <div class="flex flex-wrap mb-3 2xl:mb-5 px-5 mb:px-0">
         <div class="w-full max-w-full sm:w-3/4 mx-auto text-center">
             <p class="text-sm text-slate-500 pb-1">
-                Sesc/Senac DN  - Em caso de dificuldades de conexão entre em contato com um de nossos colaboradores.
+                Unisinos - Em caso de dificuldades de conexão entre em contato com um de nossos colaboradores.
             </p>
         </div>
     </div>
@@ -122,6 +129,7 @@
     const cpfInput = document.getElementById('cpf');
     const form = document.getElementById('form');
     const errorMessage = document.getElementById('error');
+    const phone = document.getElementById('phone');
 
     cpfInput.value = cpfInput.value ? cpf(cpfInput.value) : '';
 
@@ -129,13 +137,36 @@
         e.preventDefault();
         const plainCPF = cpfInput.value.replace(/\D/g, ''); // Remove formatação
 
+        const phoneValue = phone.value.replace(/\D/g, ""); // Remove tudo o que não é dígito
+
         if (!validateCPF(plainCPF)) {
             errorMessage.style.display = 'block';
         } else {
             errorMessage.style.display = 'none';
             cpfInput.value = plainCPF; // Envia o CPF sem formatação
+            phone.value = phoneValue;
             this.submit();
         }
+    });
+
+    phone.addEventListener('input', function (e) {
+        let value = e.target.value;
+
+        value = value.replace(/\D/g, ""); // Remove tudo o que não é dígito
+
+        if (value.length > 11) {
+            value = value.slice(0, 11);
+        }
+
+        if (value.length > 2) {
+            value = value.replace(/^(\d{2})/, '($1) ');
+        }
+
+        if (value.length > 7) {
+            value = value.replace(/(\d{5})(\d{1,4})/, '$1-$2');
+        }
+
+        e.target.value = value;
     });
 
     cpfInput.addEventListener('input', function (e) {

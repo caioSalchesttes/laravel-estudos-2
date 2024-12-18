@@ -25,6 +25,7 @@ class RegisterRequest extends FormRequest
             'name'  => 'required|string',
             'email' => 'required|email|unique:users',
             'cpf'   => 'required|numeric|unique:users',
+            'phone' => 'required|numeric',
         ];
     }
 
@@ -44,6 +45,8 @@ class RegisterRequest extends FormRequest
             'cpf.unique'     => 'CPF já cadastrado',
             'email.email'    => 'Email inválido',
             'name.string'    => 'Nome inválido',
+            'phone.required' => 'Telefone é obrigatório',
+            'phone.numeric'  => 'Telefone inválido',
         ];
     }
 }
